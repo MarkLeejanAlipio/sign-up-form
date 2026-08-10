@@ -6,4 +6,7 @@ First project in IHTMLACSS. Taught me how to create and style a form that valida
 ![Project Image](/images/image.png)
 
 # Live
-[Live preview](https://markleejanalipio.github.io/sign-up-form/)
+[Live preview](https://leejanalipio.github.io/sign-up-form/)
+
+# Features
+- Form validation for email address

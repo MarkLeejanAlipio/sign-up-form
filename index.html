@@ -1,59 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <main>
-        <div class="left-container">
-            <div class="logo">
-                <img src="images/odin-lined.png" alt="Odin logo" class="logo-img">
-                <h1 class="logo-text">ODIN</h1>
-            </div>
+      <div class="left-container">
+        <div class="logo">
+          <img src="images/odin-lined.png" alt="Odin logo" class="logo-img" />
+          <h1 class="logo-text">ODIN</h1>
         </div>
-        <div class="right-container">
-            <div class="header-section">
-                <h2 class="header-text top">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quod expedita deleniti ad, ullam reprehenderit nostrum, provident tenetur porro cumque reiciendis, sed ut. Est nemo ratione deserunt, illum vitae vel?</h2>
-                <h2 class="header-text">You <em>know</em> you want to.</h2>
-            </div>
-            <form action="#" method="post" class="form-section" id="sign-up-form">
-                <h2>Let's do this!</h2>
+      </div>
+      <div class="right-container">
+        <div class="header-section">
+          <h2 class="header-text top">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus
+            quod expedita deleniti ad, ullam reprehenderit nostrum, provident
+            tenetur porro cumque reiciendis, sed ut. Est nemo ratione deserunt,
+            illum vitae vel?
+          </h2>
+          <h2 class="header-text">You <em>know</em> you want to.</h2>
+        </div>
+        <form
+          action="#"
+          method="post"
+          class="form-section"
+          id="sign-up-form"
+          novalidate
+        >
+          <h2>Let's do this!</h2>
 
-                <div class="input-container">
-                    <div class="input">
-                        <label for="first-name">FIRST NAME</label>
-                        <input type="text" id="first-name" name="first-name" placeholder="Thor" required>
-                    </div>
-                    <div class="input">
-                        <label for="last-name">LAST NAME</label>
-                        <input type="text" id="last-name" name="last-name" placeholder="Odinson" required>
-                    </div>
-                    <div class="input">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" placeholder="odin@gmail.com" required>
-                    </div>
-                    <div class="input">
-                        <label for="number">NUMBER</label>
-                        <input type="tel" id="number" name="number" placeholder="+63 917 555 0123" required>
-                    </div>
-                    <div class="input">
-                        <label for="password">PASSWORD</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <div class="input">
-                        <label for="confirm-password">CONFIRM PASSWORD</label>
-                        <input type="password" id="confirm-password" name="confirm-password" required>
-                    </div>
-                </div>
-            </form>
-            <div class="footer-section">
-                <button class="create-btn" type="submit" form="sign-up-form">Create Account</button>
-                <p>Already have an account? <a href="#" class="login-link">Log in</a></p>
+          <div class="input-container">
+            <div class="input">
+              <label for="first-name">FIRST NAME</label>
+              <input
+                type="text"
+                id="first-name"
+                name="first-name"
+                placeholder="Thor"
+                required
+              />
             </div>
+            <div class="input">
+              <label for="last-name">LAST NAME</label>
+              <input
+                type="text"
+                id="last-name"
+                name="last-name"
+                placeholder="Odinson"
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="email">EMAIL</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="odin@gmail.com"
+                minlength="8"
+                required
+              />
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="input">
+              <label for="number">NUMBER</label>
+              <input
+                type="tel"
+                id="number"
+                name="number"
+                placeholder="+63 917 555 0123"
+                required
+              />
+            </div>
+            <div class="input">
+              <label for="password">PASSWORD</label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <div class="input">
+              <label for="confirm-password">CONFIRM PASSWORD</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+              />
+            </div>
+          </div>
+        </form>
+        <div class="footer-section">
+          <button class="create-btn" type="submit" form="sign-up-form">
+            Create Account
+          </button>
+          <p>
+            Already have an account? <a href="#" class="login-link">Log in</a>
+          </p>
         </div>
+      </div>
     </main>
-</body>
+
+    <script>
+      const form = document.querySelector(".form-section");
+      const email = document.querySelector("#email");
+      const emailError = document.querySelector(".error");
+
+      email.addEventListener("input", (event) => {
+        // If the input is valid, remove the active class
+        if (email.validity.valid) {
+          emailError.textContent = "";
+          emailError.className = "error";
+        } else {
+          showError();
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        // If email is not valid, submit won't function
+        if (!email.validity.valid) {
+          showError();
+
+          event.preventDefault();
+        }
+      });
+
+      function showError() {
+        if (email.validity.valueMissing) {
+          emailError.textContent = "You need to enter an email address";
+        } else if (email.validity.typeMismatch) {
+          emailError.textContent = "You need to enter an email address";
+        } else if (email.validity.tooShort) {
+          emailError.textContent = `Email length needs to be at least ${email.minLength} characters: You entered ${email.value.length}.`;
+        }
+
+        emailError.classList.add('active');
+      }
+    </script>
+  </body>
 </html>
